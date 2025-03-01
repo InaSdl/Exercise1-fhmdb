@@ -76,9 +76,7 @@ public class Movie {
                     "A public relations officer is caught in a time loop and must relive the same day repeatedly while fighting aliens in an intergalactic war.",
                     Arrays.asList(Genre.SCIENCE_FICTION, Genre.ACTION, Genre.THRILLER)));
 
-            movies.add(new Movie("Total Recall",
-                    "A man’s memories are erased and he finds himself caught up in a battle to escape a conspiracy involving a fictional memory implant service.",
-                    Arrays.asList(Genre.SCIENCE_FICTION, Genre.ACTION, Genre.THRILLER)));
+
 
 
             // TODO add some dummy data here
