@@ -31,13 +31,13 @@ public class HomeController implements Initializable {
     @FXML
     public JFXButton sortBtn;
 
-    public List<Movie> allMovies = Movie.initializeMovies();
+    public List<Movie> movies = Movie.initializeMovies();
 
     private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(allMovies);         // add dummy data to observable list
+        observableMovies.addAll(movies);         // add dummy data to observable list
 
         // initialize UI stuff
         movieListView.setItems(observableMovies);   // set data of observable list to list view
@@ -51,15 +51,24 @@ public class HomeController implements Initializable {
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
-            if(sortBtn.getText().equals("Sort (asc)")) {
+            if (sortBtn.getText().equals("Sort (asc)")) {
                 // TODO sort observableMovies ascending
+                sortAscending();
                 sortBtn.setText("Sort (desc)");
             } else {
                 // TODO sort observableMovies descending
                 sortBtn.setText("Sort (asc)");
             }
+
         });
 
+    }
 
+    public void sortAscending() {
+        observableMovies.sort((movie1, movie2) -> movie1.getTitle().compareTo(movie2.getTitle()));
+    }
+
+    public ObservableList<Movie> getObservableMovies() {
+        return observableMovies;
     }
 }
