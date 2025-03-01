@@ -26,7 +26,9 @@ public class Movie {
     }
 
     public String getGenres() {
-        return genres.toString();
+        return genres == null || genres.isEmpty()
+                ? "No genres available"
+                : String.join(", ", genres.stream().map(Enum::name).toList());
     }
 
     @Override
