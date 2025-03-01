@@ -16,9 +16,25 @@ class HomeControllerTest {
         ObservableList<Movie> observableMovies = homeController.getObservableMovies();
         observableMovies.addAll(Movie.initializeMovies());
         //When:
-        homeController.sortAscending();
+        homeController.sortAscending(observableMovies);
         //Then:
-        assertEquals("Donnie Darko", observableMovies.get(0).getTitle());
+        for (int i = 0; i < observableMovies.size() - 1; i++) {
+            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) <= 0);
+        }
+    }
+
+    @Test
+    public void testSortDescending() {
+        //Given:
+        HomeController homeController = new HomeController();
+        ObservableList<Movie> observableMovies = homeController.getObservableMovies();
+        observableMovies.addAll(Movie.initializeMovies());
+        //When:
+        homeController.sortDescending(observableMovies);
+        //Then:
+        for (int i = 0; i < observableMovies.size() - 1; i++) {
+            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) >= 0);
+        }
     }
 
 

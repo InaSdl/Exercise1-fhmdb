@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -53,10 +54,11 @@ public class HomeController implements Initializable {
         sortBtn.setOnAction(actionEvent -> {
             if (sortBtn.getText().equals("Sort (asc)")) {
                 // TODO sort observableMovies ascending
-                sortAscending();
+                sortAscending(observableMovies);
                 sortBtn.setText("Sort (desc)");
             } else {
                 // TODO sort observableMovies descending
+                sortDescending(observableMovies);
                 sortBtn.setText("Sort (asc)");
             }
 
@@ -64,8 +66,11 @@ public class HomeController implements Initializable {
 
     }
 
-    public void sortAscending() {
-        observableMovies.sort((movie1, movie2) -> movie1.getTitle().compareTo(movie2.getTitle()));
+    public void sortAscending(ObservableList<Movie> movies) {
+        movies.sort(Comparator.comparing(Movie::getTitle));
+    }
+    public void sortDescending(ObservableList<Movie> movies) {
+        movies.sort(Comparator.comparing(Movie::getTitle).reversed());
     }
 
     public ObservableList<Movie> getObservableMovies() {
