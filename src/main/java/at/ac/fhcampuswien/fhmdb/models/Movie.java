@@ -48,6 +48,10 @@ public class Movie {
                     "A thief who enters the dreams of others to steal their secrets must plant an idea in a target’s subconscious.",
                     Arrays.asList(Genre.SCIENCE_FICTION, Genre.THRILLER, Genre.ACTION)));
 
+            movies.add(new Movie("Inception",
+                    "A thief who enters the dreams of others to steal their secrets must plant an idea in a target’s subconscious.",
+                    Arrays.asList(Genre.SCIENCE_FICTION, Genre.THRILLER, Genre.ACTION)));
+
             movies.add(new Movie("Interstellar",
                     "A group of explorers embarks on a space journey to find a new habitable planet as Earth faces extinction.",
                     Arrays.asList(Genre.SCIENCE_FICTION, Genre.DRAMA, Genre.THRILLER)));
