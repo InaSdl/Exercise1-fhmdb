@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -38,9 +39,42 @@ public class HomeController implements Initializable {
     private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     public ObservableList<Movie> filterMovies(String query, Genre genre) {
-        return FXCollections.observableArrayList(); // Platzhalter-Rückgabe, immer eine leere Liste
-    }
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList(); // Create a new list for filtered movies
 
+        // Loop through all movies in the list
+        for (Movie movie : movies) {
+            boolean matchesQuery = true;
+            boolean matchesGenre = true;
+
+            // check if the title or description == the query
+            if (query != null && !query.isBlank()) {
+                String lowerCaseQuery = query.toLowerCase(); // Convert the query to lowercase
+                String lowerCaseTitle = movie.getTitle().toLowerCase();
+                String lowerCaseDescription = movie.getDescription().toLowerCase();
+
+                if (!lowerCaseTitle.contains(lowerCaseQuery) && !lowerCaseDescription.contains(lowerCaseQuery)) {
+                    matchesQuery = false; // if neither the title nor the description contains the query -> not a match
+                }
+            }
+
+            // Check if the movie belongs to the selected genre
+            if (genre != null) {
+                String lowerCaseGenres = movie.getGenres().toLowerCase(); // Convert genres to lowercase
+                String lowerCaseGenreName = genre.name().toLowerCase(); // Convert selected genre to lowercase
+
+                if (!lowerCaseGenres.contains(lowerCaseGenreName)) {
+                    matchesGenre = false; // If the movie does not belong to the selected genre, it's not a match
+                }
+            }
+
+            // If the movie matches both the query and the genre, add it to the filtered list
+            if (matchesQuery && matchesGenre) {
+                filteredMovies.add(movie);
+            }
+        }
+
+        return filteredMovies; // Return the filtered movie list
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,6 +85,7 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
+        genreComboBox.getItems().addAll(Genre.values());
         genreComboBox.setPromptText("Filter by Genre");
 
         // TODO add event handlers to buttons and call the regarding methods
@@ -67,14 +102,21 @@ public class HomeController implements Initializable {
                 sortDescending(observableMovies);
                 sortBtn.setText("Sort (asc)");
             }
-
         });
 
+        // set event handler for the filter button to update movie list based on search criteria
+        searchBtn.setOnAction(actionEvent -> {
+            String query = searchField.getText();
+            Genre selectedGenre = (Genre) genreComboBox.getValue();
+            // Apply the filter and update the observable list:
+            observableMovies.setAll(filterMovies(query, selectedGenre));
+        });
     }
 
     public void sortAscending(ObservableList<Movie> movies) {
         movies.sort(Comparator.comparing(Movie::getTitle));
     }
+
     public void sortDescending(ObservableList<Movie> movies) {
         movies.sort(Comparator.comparing(Movie::getTitle).reversed());
     }
@@ -82,5 +124,4 @@ public class HomeController implements Initializable {
     public ObservableList<Movie> getObservableMovies() {
         return observableMovies;
     }
-
-    }
+}
