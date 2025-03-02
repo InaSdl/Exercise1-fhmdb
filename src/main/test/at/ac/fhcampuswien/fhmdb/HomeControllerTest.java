@@ -99,7 +99,8 @@ class HomeControllerTest {
 
         // Then: Die Liste enthält alle Filme mit "the".
         assertEquals(9, filteredMovies.size()); // Erwartet, dass es 9 Filme gibt.
-        assertTrue(filteredMovies.stream().allMatch(movie -> movie.getTitle().contains(query) || movie.getDescription().contains(query)));
+        assertTrue(filteredMovies.stream().allMatch(movie -> movie.getTitle().contains
+                (query) || movie.getDescription().contains(query)));
     }
 
     @Test

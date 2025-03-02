@@ -82,12 +82,26 @@ public class HomeController implements Initializable {
 
 
     public void filterMoviesByGenre(Genre genre) {
-        //
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList
+                (movies.stream().filter(movie -> movie.getGenres().contains(genre)).collect(Collectors.toList()));
+
+        observableMovies.setAll(filteredMovies);
     }
 
     public void clearGenre() {
+        observableMovies.setAll(movies);
     }
 
     public void searchMovies(String query) {
+        ObservableList<Movie> searchedMovies;
+
+        if (query.isEmpty()) {
+            searchedMovies = FXCollections.observableArrayList(movies);
+        } else {
+            searchedMovies = FXCollections.observableArrayList(
+                    movies.stream().filter(movie -> movie.getTitle().toLowerCase().contains(query.toLowerCase())
+                            || movie.getDescription().toLowerCase().contains(query.toLowerCase())).collect(Collectors.toList()));
+        }
+        observableMovies.setAll(searchedMovies);
     }
 }
