@@ -26,7 +26,9 @@ public class Movie {
     }
 
     public String getGenres() {
-        return genres.toString();
+        return genres == null || genres.isEmpty()
+                ? "No genres available"
+                : String.join(", ", genres.stream().map(Enum::name).toList());
     }
 
     @Override
@@ -43,6 +45,10 @@ public class Movie {
 
         public static List<Movie> initializeMovies() {
             List<Movie> movies = new ArrayList<>();
+
+            movies.add(new Movie("Inception",
+                    "A thief who enters the dreams of others to steal their secrets must plant an idea in a target’s subconscious.",
+                    Arrays.asList(Genre.SCIENCE_FICTION, Genre.THRILLER, Genre.ACTION)));
 
             movies.add(new Movie("Inception",
                     "A thief who enters the dreams of others to steal their secrets must plant an idea in a target’s subconscious.",
@@ -75,6 +81,15 @@ public class Movie {
             movies.add(new Movie("Edge of Tomorrow",
                     "A public relations officer is caught in a time loop and must relive the same day repeatedly while fighting aliens in an intergalactic war.",
                     Arrays.asList(Genre.SCIENCE_FICTION, Genre.ACTION, Genre.THRILLER)));
+
+            movies.add(new Movie("Looper",
+                    "A hired gun in the future, who kills people sent back in time by criminal organizations, faces a moral dilemma when his future self is sent back for execution.",
+                    Arrays.asList(Genre.SCIENCE_FICTION, Genre.THRILLER, Genre.ACTION)));
+
+            movies.add(new Movie("Donnie Darko",
+                    "A troubled teenager experiences disturbing visions of a man in a creepy rabbit costume, leading him to uncover a series of strange events involving time travel and reality distortion.",
+                    Arrays.asList(Genre.DRAMA, Genre.SCIENCE_FICTION, Genre.THRILLER)));
+
 
 
 

@@ -33,6 +33,7 @@
             <version>17.0.2</version>
         </dependency>
 
+        <!-- JUnit Jupiter API und Engine für Tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

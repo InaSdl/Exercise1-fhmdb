@@ -1,35 +1,41 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import at.ac.fhcampuswien.fhmdb.models.Movie;
+import javafx.collections.ObservableList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class HomeControllerTest {
 
-//@Test
-private HomeController homeController;
-
-    @BeforeEach
-    public void setUp() {
-        homeController = new HomeController();
-        homeController.initialize(null, null);  // Simuliere die Initialisierung der UI ohne tatsächliche UI
+    @Test
+    public void testSortAscending() {
+        //Given:
+        HomeController homeController = new HomeController();
+        ObservableList<Movie> observableMovies = homeController.getObservableMovies();
+        observableMovies.addAll(Movie.initializeMovies());
+        //When:
+        homeController.sortAscending(observableMovies);
+        //Then:
+        for (int i = 0; i < observableMovies.size() - 1; i++) {
+            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) <= 0);
+        }
     }
 
     @Test
-    public void testObservableMoviesInitialization() {
-        // Teste, ob die Filme korrekt zur observableMovies Liste hinzugefügt wurden
-        List<Movie> allMovies = Movie.initializeMovies();  // Annahme: Movie.initializeMovies() gibt eine Liste zurück
-        assertEquals(allMovies.size(), homeController.observableMovies.size(), "Die Anzahl der Filme sollte übereinstimmen.");
+    public void testSortDescending() {
+        //Given:
+        HomeController homeController = new HomeController();
+        ObservableList<Movie> observableMovies = homeController.getObservableMovies();
+        observableMovies.addAll(Movie.initializeMovies());
+        //When:
+        homeController.sortDescending(observableMovies);
+        //Then:
+        for (int i = 0; i < observableMovies.size() - 1; i++) {
+            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) >= 0);
+        }
     }
-
-
-
-
-
 
 
 }

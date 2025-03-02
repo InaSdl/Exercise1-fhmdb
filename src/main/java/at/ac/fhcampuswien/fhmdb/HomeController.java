@@ -1,6 +1,5 @@
 package at.ac.fhcampuswien.fhmdb;
 
-import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -13,9 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -33,13 +32,13 @@ public class HomeController implements Initializable {
     @FXML
     public JFXButton sortBtn;
 
-    public List<Movie> allMovies = Movie.initializeMovies();
+    public List<Movie> movies = Movie.initializeMovies();
 
-    public final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
+    private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(allMovies);         // add dummy data to observable list
+        observableMovies.addAll(movies);         // add dummy data to observable list
 
         // initialize UI stuff
         movieListView.setItems(observableMovies);   // set data of observable list to list view
@@ -48,42 +47,33 @@ public class HomeController implements Initializable {
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
 
-        genreComboBox.getItems().addAll(Genre.values());
+        // TODO add event handlers to buttons and call the regarding methods
+        // either set event handlers in the fxml file (onAction) or add them here
 
+        // Sort button example:
+        sortBtn.setOnAction(actionEvent -> {
+            if (sortBtn.getText().equals("Sort (asc)")) {
+                // TODO sort observableMovies ascending
+                sortAscending(observableMovies);
+                sortBtn.setText("Sort (desc)");
+            } else {
+                // TODO sort observableMovies descending
+                sortDescending(observableMovies);
+                sortBtn.setText("Sort (asc)");
+            }
 
-
-
-            // TODO add event handlers to buttons and call the regarding methods
-            // either set event handlers in the fxml file (onAction) or add them here
-
-            // Sort button example:
-            sortBtn.setOnAction(actionEvent -> {
-                if (sortBtn.getText().equals("Sort (asc)")) {
-                    // TODO sort observableMovies ascending
-                    sortBtn.setText("Sort (desc)");
-                } else {
-                    // TODO sort observableMovies descending
-                    sortBtn.setText("Sort (asc)");
-                }
-            });
-
+        });
 
     }
 
-    private void filterMoviesByGenre(Genre genre) {
-        if (genre == null) {
-            // Wenn kein Genre ausgewählt, zeige alle Filme
-            observableMovies.setAll(allMovies);
-        } else {
-            // Filtere Filme, die das ausgewählte Genre haben
-            List<Movie> filteredMovies = allMovies.stream()
-                    .filter(movie -> movie.getGenres().contains(genre)) // Vergleiche Enum-Werte
-                    .collect(Collectors.toList());
-
-            observableMovies.setAll(filteredMovies); // Aktualisiere die ObservableList mit den gefilterten Filmen
-        }
+    public void sortAscending(ObservableList<Movie> movies) {
+        movies.sort(Comparator.comparing(Movie::getTitle));
+    }
+    public void sortDescending(ObservableList<Movie> movies) {
+        movies.sort(Comparator.comparing(Movie::getTitle).reversed());
     }
 
-
-
+    public ObservableList<Movie> getObservableMovies() {
+        return observableMovies;
+    }
 }
