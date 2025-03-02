@@ -88,6 +88,71 @@ public class Movie {
                     "A troubled teenager experiences disturbing visions of a man in a creepy rabbit costume, leading him to uncover a series of strange events involving time travel and reality distortion.",
                     Arrays.asList(Genre.DRAMA, Genre.SCIENCE_FICTION, Genre.THRILLER)));
 
+            movies.add(new Movie("Indiana Jones and the Last Crusade",
+                    "An archaeologist embarks on an adventure to find the Holy Grail before the Nazis do.",
+                    Arrays.asList(Genre.ADVENTURE, Genre.ACTION)));
+
+            movies.add(new Movie("Toy Story",
+                    "A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy's room.",
+                    Arrays.asList(Genre.ANIMATION, Genre.COMEDY, Genre.FAMILY)));
+
+            movies.add(new Movie("The Theory of Everything",
+                    "The life story of the theoretical physicist Stephen Hawking, showcasing his struggles with ALS and his groundbreaking scientific work.",
+                    Arrays.asList(Genre.BIOGRAPHY, Genre.DRAMA)));
+
+            movies.add(new Movie("Superbad",
+                    "Two co-dependent high school seniors attempt to score alcohol for a party to impress their crushes.",
+                    Arrays.asList(Genre.COMEDY, Genre.ROMANCE)));
+
+            movies.add(new Movie("The Godfather",
+                    "The aging patriarch of an organized crime dynasty transfers control of his empire to his reluctant son.",
+                    Arrays.asList(Genre.CRIME, Genre.DRAMA)));
+
+            movies.add(new Movie("Won't You Be My Neighbor?",
+                    "An intimate look at America’s favorite neighbor, Mister Rogers.",
+                    Arrays.asList(Genre.DOCUMENTARY, Genre.BIOGRAPHY)));
+
+            movies.add(new Movie("Finding Nemo",
+                    "A clownfish sets out on a journey to find his lost son.",
+                    Arrays.asList(Genre.FAMILY, Genre.ADVENTURE, Genre.ANIMATION)));
+
+            movies.add(new Movie("The Lord of the Rings: The Fellowship of the Ring",
+                    "A young hobbit and his companions embark on a journey to destroy a powerful ring.",
+                    Arrays.asList(Genre.FANTASY, Genre.ADVENTURE, Genre.ACTION)));
+
+            movies.add(new Movie("Schindler's List",
+                    "A German industrialist saves thousands of Jewish refugees during World War II by employing them in his factories.",
+                    Arrays.asList(Genre.HISTORY, Genre.DRAMA, Genre.WAR)));
+
+            movies.add(new Movie("The Conjuring",
+                    "Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.",
+                    Arrays.asList(Genre.HORROR, Genre.MYSTERY, Genre.THRILLER)));
+
+            movies.add(new Movie("La La Land",
+                    "A jazz musician and an aspiring actress fall in love while pursuing their dreams in Los Angeles.",
+                    Arrays.asList(Genre.MUSICAL, Genre.ROMANCE, Genre.COMEDY)));
+
+            movies.add(new Movie("The Girl with the Dragon Tattoo",
+                    "A journalist and a computer hacker uncover dark secrets while investigating a decades-old missing person case.",
+                    Arrays.asList(Genre.MYSTERY, Genre.CRIME, Genre.THRILLER)));
+
+            movies.add(new Movie("Titanic",
+                    "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated Titanic.",
+                    Arrays.asList(Genre.ROMANCE, Genre.DRAMA, Genre.HISTORY)));
+
+            movies.add(new Movie("Rocky",
+                    "A small-time boxer gets a once-in-a-lifetime chance to fight the heavyweight champion.",
+                    Arrays.asList(Genre.SPORT, Genre.DRAMA)));
+
+            movies.add(new Movie("Saving Private Ryan",
+                    "A group of U.S. soldiers go behind enemy lines to retrieve a paratrooper whose brothers have been killed in action.",
+                    Arrays.asList(Genre.WAR, Genre.DRAMA, Genre.ACTION)));
+
+            movies.add(new Movie("The Good, the Bad and the Ugly",
+                    "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a hidden treasure during the American Civil War.",
+                    Arrays.asList(Genre.WESTERN, Genre.ACTION, Genre.ADVENTURE)));
+
+
 
 
 
