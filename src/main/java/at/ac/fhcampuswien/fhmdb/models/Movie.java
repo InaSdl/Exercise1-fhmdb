@@ -25,10 +25,8 @@ public class Movie {
         return description;
     }
 
-    public String getGenres() {
-        return genres == null || genres.isEmpty()
-                ? "No genres available"
-                : String.join(", ", genres.stream().map(Enum::name).toList());
+    public List<Genre> getGenres() {
+        return genres;
     }
 
     @Override
@@ -36,7 +34,7 @@ public class Movie {
         return "\n" + title + "\n" + description + "\nGenres: " + genresToString();
     }
 
-    private String genresToString() {
+    public String genresToString() {
         return genres == null || genres.isEmpty()
                 ? "No genres available"
                 : String.join(", ", genres.stream().map(Enum::name).toList());

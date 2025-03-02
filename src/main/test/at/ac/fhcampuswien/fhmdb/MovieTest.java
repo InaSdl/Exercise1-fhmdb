@@ -22,13 +22,13 @@ public class MovieTest {
     }
     @Test
     public void testMovieToString() {
-        // GIVEN: Ein Movie-Objekt mit einem Titel, einer Beschreibung und Genres
+        // given Ein Movie-Objekt mit einem Titel, einer Beschreibung und Genres
         Movie movie = new Movie("Test Movie", "A test movie description", List.of(Genre.ACTION, Genre.DRAMA));
 
-        // WHEN: Wir rufen die toString() Methode auf
+        // when Wir rufen die toString() Methode auf
         String movieString = movie.toString();
 
-        // THEN: Wir erwarten, dass die toString-Methode die korrekte Formatierung zurückgibt
+        // when Wir erwarten, dass die toString-Methode die korrekte Formatierung zurückgibt
         String expectedString = "\nTest Movie\nA test movie description\nGenres: ACTION, DRAMA";
         assertEquals(expectedString, movieString, "Die toString-Ausgabe ist nicht korrekt.");
     }

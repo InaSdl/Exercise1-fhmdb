@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -14,7 +15,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -75,5 +78,30 @@ public class HomeController implements Initializable {
 
     public ObservableList<Movie> getObservableMovies() {
         return observableMovies;
+    }
+
+
+    public void filterMoviesByGenre(Genre genre) {
+        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList
+                (movies.stream().filter(movie -> movie.getGenres().contains(genre)).collect(Collectors.toList()));
+
+        observableMovies.setAll(filteredMovies);
+    }
+
+    public void clearGenre() {
+        observableMovies.setAll(movies);
+    }
+
+    public void searchMovies(String query) {
+        ObservableList<Movie> searchedMovies;
+
+        if (query.isEmpty()) {
+            searchedMovies = FXCollections.observableArrayList(movies);
+        } else {
+            searchedMovies = FXCollections.observableArrayList(
+                    movies.stream().filter(movie -> movie.getTitle().toLowerCase().contains(query.toLowerCase())
+                            || movie.getDescription().toLowerCase().contains(query.toLowerCase())).collect(Collectors.toList()));
+        }
+        observableMovies.setAll(searchedMovies);
     }
 }
