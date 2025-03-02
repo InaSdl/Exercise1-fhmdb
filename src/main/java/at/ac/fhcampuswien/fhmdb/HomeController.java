@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -14,7 +15,9 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -75,5 +78,16 @@ public class HomeController implements Initializable {
 
     public ObservableList<Movie> getObservableMovies() {
         return observableMovies;
+    }
+
+
+    public void filterMoviesByGenre(Genre genre) {
+        //
+    }
+
+    public void clearGenre() {
+    }
+
+    public void searchMovies(String query) {
     }
 }
