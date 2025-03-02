@@ -69,7 +69,7 @@ class HomeControllerTest {
         assertEquals(3, filteredMovies.size()); // Erwartet, dass es 3 Filme mit MYSTERY gibt.
 
         // When: Filter wird entfernt.
-        this.homeController.clearGenre();
+        this.homeController.filterMoviesByGenre(null);
 
         // Then: Die Liste enthält wieder alle Filme.
         assertEquals(11, filteredMovies.size()); // Erwartet, dass alle Filme angezeigt werden.

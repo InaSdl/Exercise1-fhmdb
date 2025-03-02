@@ -16,8 +16,8 @@ public class MovieTest {
         // when initialise movies
         List<Movie> movies = Movie.initializeMovies();
 
-        // then we expect 8 movies
-        assertEquals(8, movies.size(), "Die Anzahl der Filme sollte 8 sein.");
+        // then we expect 11 movies
+        assertEquals(11, movies.size(), "Die Anzahl der Filme sollte 8 sein.");
 
     }
     @Test
