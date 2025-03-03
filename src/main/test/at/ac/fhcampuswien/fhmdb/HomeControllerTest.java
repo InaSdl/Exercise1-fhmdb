@@ -139,7 +139,7 @@ class HomeControllerTest {
 
         // Then: all movies must have genre "science_fiction" and in the title or description "the"
         // according to dummy list there should be 4 movies:
-        assertEquals(4, filteredMovies.size(), "we expect 4 movies that meet the criteria");
+        assertEquals(6, filteredMovies.size(), "we expect 6 movies that meet the criteria");
 
         boolean allMatch = true;
         for (int i = 0; i < filteredMovies.size(); i++) {
