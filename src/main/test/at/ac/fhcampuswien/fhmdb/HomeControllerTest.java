@@ -128,4 +128,40 @@ class HomeControllerTest {
         // Then: Die Liste enthält alle Filme.
         assertEquals(27, filteredMovies.size());
     }
+
+    @Test
+    void Filter_By_Genre_And_SearchQuery() {
+        // Given: the entire movie-list is already there
+        // When: we filter by genre SCIENCE_FICTION and query "the".
+        this.homeController.filterMovies(Genre.SCIENCE_FICTION, "the");
+        ObservableList<Movie> filteredMovies = this.homeController.getObservableMovies();
+
+        // Then: all movies must have genre "science_fiction" and in the title or description "the"
+        // according to dummy list there should be 4 movies:
+        assertEquals(4, filteredMovies.size(), "we expect 4 movies that meet the criteria");
+
+        boolean allMatch = true;
+        for (int i = 0; i < filteredMovies.size(); i++) {
+            Movie movie = filteredMovies.get(i);
+
+            // check if the movie has the genre SCIENCE_FICTION
+            if (!movie.getGenres().contains(Genre.SCIENCE_FICTION)) {
+                allMatch = false;
+                break;
+            }
+
+            // convert title and description to lower case for case insensitive comparison
+            String titleLower = movie.getTitle().toLowerCase();
+            String descriptionLower = movie.getDescription().toLowerCase();
+
+            // check if either title or description contains word "the"
+            if (!(titleLower.contains("the") || descriptionLower.contains("the"))) {
+                allMatch = false;
+                break;
+            }
+        }
+
+        assertTrue(allMatch, "All movies should have genre SCIENCE_FICTION and 'the' in title or description");
+    }
+
 }
