@@ -36,13 +36,20 @@ public class Movie {
     }
 
     public String genresToString() {
-        return genres == null || genres.isEmpty()
-                ? "No genres available"
-                : String.join(", ", genres.stream().map(Enum::name).toList());
+        if (genres == null || genres.isEmpty()) {
+            return "No genres available";
+        }
 
+        List<String> genreNames = new ArrayList<>();
+        for (Genre genre : genres) {
+            genreNames.add(genre.name());
+        }
+
+        return String.join(", ", genreNames);
     }
 
-        public static List<Movie> initializeMovies() {
+
+    public static List<Movie> initializeMovies() {
             List<Movie> movies = new ArrayList<>();
 
             movies.add(new Movie("Inception",
