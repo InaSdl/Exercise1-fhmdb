@@ -14,40 +14,41 @@ class HomeControllerTest {
     private HomeController homeController;
 
 
-    @Test
-    public void Sort_Ascending() {
-        //Given:
-        HomeController homeController = new HomeController();
-        ObservableList<Movie> observableMovies = homeController.getObservableMovies();
-        observableMovies.addAll(Movie.initializeMovies());
-        //When:
-        homeController.sortAscending(observableMovies);
-        //Then:
-        for (int i = 0; i < observableMovies.size() - 1; i++) {
-            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) <= 0);
-        }
-    }
-
-    @Test
-    public void Sort_Descending() {
-        //Given:
-        HomeController homeController = new HomeController();
-        ObservableList<Movie> observableMovies = homeController.getObservableMovies();
-        observableMovies.addAll(Movie.initializeMovies());
-        //When:
-        homeController.sortDescending(observableMovies);
-        //Then:
-        for (int i = 0; i < observableMovies.size() - 1; i++) {
-            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) >= 0);
-        }
-    }
-
     @BeforeEach
     void setUp() {
         this.homeController = new HomeController();
         ObservableList<Movie> observableMovies = this.homeController.getObservableMovies();
         observableMovies.addAll(Movie.initializeMovies());
     }
+
+    @Test
+    void Sort_Ascending() {
+        // Given: Liste Observable Movies
+
+        // When: Die Funktion Sort_Ascending wird aufgerufen um aufsteigend zu sortieren.
+        this.homeController.sortAscending(this.homeController.getObservableMovies());
+
+        // Then: Die Liste ist aufsteigend sortiert.
+        ObservableList<Movie> observableMovies = this.homeController.getObservableMovies();
+        for (int i = 0; i < observableMovies.size() - 1; i++) {
+            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) <= 0);
+        }
+    }
+
+
+    @Test
+    public void Sort_Descending() {
+        //Given: Liste Observable Movies
+
+        //When: Die Funktion Sort_Descending wird aufgerufen um absteigend zu sortieren.
+        this.homeController.sortDescending(this.homeController.getObservableMovies());
+        //Then: Die Liste ist absteigend sortiert.
+        ObservableList<Movie> observableMovies = this.homeController.getObservableMovies();
+        for (int i = 0; i < observableMovies.size() - 1; i++) {
+            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) >= 0);
+        }
+    }
+
 
     @Test
     void Filter_Science_Fiction_Movies() {
