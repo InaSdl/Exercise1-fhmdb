@@ -136,32 +136,34 @@ class HomeControllerTest {
         homeController.filterMovies(Genre.SCIENCE_FICTION, "the");
         ObservableList<Movie> filteredMovies = homeController.getObservableMovies();
 
-        // Then: all movies must have genre "science_fiction" and in the title or description "the"
-        // according to dummy list there should be 4 movies:
-        assertEquals(4, filteredMovies.size(), "we expect 4 movies that meet the criteria");
-
-        boolean allMatch = true;
-        for (int i = 0; i < filteredMovies.size(); i++) {
-            Movie movie = filteredMovies.get(i);
-
-            // check if the movie has the genre SCIENCE_FICTION
-            if (!movie.getGenres().contains(Genre.SCIENCE_FICTION)) {
-                allMatch = false;
-                break;
-            }
-
-            // convert title and description to lower case for case-insensitive comparison
-            String titleLower = movie.getTitle().toLowerCase();
-            String descriptionLower = movie.getDescription().toLowerCase();
-
-            // check if either title or description contains word "the"
-            if (!(titleLower.contains("the") || descriptionLower.contains("the"))) {
-                allMatch = false;
-                break;
+        // Calculate the expected number of movies using a loop
+        int expectedCount = 0;
+        List<Movie> allMovies = Movie.initializeMovies();
+        for (Movie movie : allMovies) {
+            if (movie.getGenres().contains(Genre.SCIENCE_FICTION)) {
+                String titleLower = movie.getTitle().toLowerCase();
+                String descriptionLower = movie.getDescription().toLowerCase();
+                if (titleLower.contains("the") || descriptionLower.contains("the")) {
+                    expectedCount++;
+                }
             }
         }
+        // Then: the filtered list should have the expected number of movies
+        assertEquals(expectedCount, filteredMovies.size(), "we expect " + expectedCount + " movies that meet the criteria");
 
-        assertTrue(allMatch, "All movies should have genre SCIENCE_FICTION and 'the' in title or description");
+        // And check each movie meets the criteria
+        for (Movie movie : filteredMovies) {
+            // Check that the movie has the SCIENCE_FICTION genre.
+            assertTrue(movie.getGenres().contains(Genre.SCIENCE_FICTION),
+                    "Movie does not have genre SCIENCE_FICTION: " + movie.getTitle());
+
+            // Check that either title or description contains "the" (case-insensitive)
+            String titleLower = movie.getTitle().toLowerCase();
+            String descriptionLower = movie.getDescription().toLowerCase();
+            assertTrue(titleLower.contains("the") || descriptionLower.contains("the"),
+                    "Movie does not contain 'the' in title or description: " + movie.getTitle());
+        }
     }
+
 
 }
