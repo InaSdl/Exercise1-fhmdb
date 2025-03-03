@@ -13,10 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
@@ -47,11 +44,20 @@ public class HomeController implements Initializable {
         movieListView.setItems(observableMovies);   // set data of observable list to list view
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
-        // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
+        genreComboBox.getItems().addAll(Genre.values());
 
-        // TODO add event handlers to buttons and call the regarding methods
-        // either set event handlers in the fxml file (onAction) or add them here
+        searchBtn.setOnAction(actionEvent ->  {
+            Genre selectedGenre = (Genre) genreComboBox.getSelectionModel().getSelectedItem();
+
+            if (selectedGenre == Genre.NONE) {
+                selectedGenre = null;
+            }
+
+            String searchQuery = searchField.getText();
+
+            filterMovies(selectedGenre, searchQuery);
+        });
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
@@ -66,7 +72,6 @@ public class HomeController implements Initializable {
             }
 
         });
-
     }
 
     public void sortAscending(ObservableList<Movie> movies) {
@@ -80,28 +85,30 @@ public class HomeController implements Initializable {
         return observableMovies;
     }
 
-
     public void filterMoviesByGenre(Genre genre) {
-        ObservableList<Movie> filteredMovies = FXCollections.observableArrayList
-                (movies.stream().filter(movie -> movie.getGenres().contains(genre)).collect(Collectors.toList()));
-
-        observableMovies.setAll(filteredMovies);
-    }
-
-    public void clearGenre() {
-        observableMovies.setAll(movies);
+        filterMovies(genre, "");
     }
 
     public void searchMovies(String query) {
-        ObservableList<Movie> searchedMovies;
+        filterMovies(null, query);
+    }
 
-        if (query.isEmpty()) {
-            searchedMovies = FXCollections.observableArrayList(movies);
-        } else {
-            searchedMovies = FXCollections.observableArrayList(
-                    movies.stream().filter(movie -> movie.getTitle().toLowerCase().contains(query.toLowerCase())
-                            || movie.getDescription().toLowerCase().contains(query.toLowerCase())).collect(Collectors.toList()));
-        }
-        observableMovies.setAll(searchedMovies);
+    public void filterMovies(Genre genre, String query) {
+
+        List<Movie> filteredMovies = movies.stream()
+                .filter(movie -> {
+                    if (genre != null && !movie.getGenres().contains(genre)) {
+                        return false;
+                    }
+                    if (!query.isEmpty() && !movie.getTitle().toLowerCase().contains(query.toLowerCase())
+                     && !movie.getDescription().toLowerCase().contains(query.toLowerCase()))
+                    {
+                        return false;
+                    }
+                    return true;
+                })
+                .collect(Collectors.toList());
+
+        observableMovies.setAll(filteredMovies);
     }
 }
