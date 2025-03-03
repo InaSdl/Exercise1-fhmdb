@@ -10,7 +10,7 @@ import java.util.List;
 public class MovieTest {
 
     @Test
-    public void testInitializeMovies() {
+    public void Initialize_Movies() {
         //given
 
         // when initialise movies
@@ -21,7 +21,7 @@ public class MovieTest {
 
     }
     @Test
-    public void testMovieToString() {
+    public void Movie_To_String() {
         // given Ein Movie-Objekt mit einem Titel, einer Beschreibung und Genres
         Movie movie = new Movie("Test Movie", "A test movie description", List.of(Genre.ACTION, Genre.DRAMA));
 

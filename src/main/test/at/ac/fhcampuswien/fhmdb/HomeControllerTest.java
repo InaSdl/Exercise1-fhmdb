@@ -15,7 +15,7 @@ class HomeControllerTest {
 
 
     @Test
-    public void testSortAscending() {
+    public void Sort_Ascending() {
         //Given:
         HomeController homeController = new HomeController();
         ObservableList<Movie> observableMovies = homeController.getObservableMovies();
@@ -29,7 +29,7 @@ class HomeControllerTest {
     }
 
     @Test
-    public void testSortDescending() {
+    public void Sort_Descending() {
         //Given:
         HomeController homeController = new HomeController();
         ObservableList<Movie> observableMovies = homeController.getObservableMovies();
