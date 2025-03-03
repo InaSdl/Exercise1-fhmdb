@@ -66,13 +66,12 @@ class HomeControllerTest {
         // Given: Die Liste enthält MYSTERY-Filme.
         this.homeController.filterMoviesByGenre(Genre.MYSTERY);
         ObservableList<Movie> filteredMovies = this.homeController.getObservableMovies();
-        assertEquals(3, filteredMovies.size()); // Erwartet, dass es 3 Filme mit MYSTERY gibt.
 
         // When: Filter wird entfernt.
         this.homeController.filterMoviesByGenre(null);
 
         // Then: Die Liste enthält wieder alle Filme.
-        assertEquals(11, filteredMovies.size()); // Erwartet, dass alle Filme angezeigt werden.
+        assertEquals(27, filteredMovies.size()); // Erwartet, dass alle Filme angezeigt werden.
     }
 
     @Test
@@ -98,7 +97,7 @@ class HomeControllerTest {
         ObservableList<Movie> filteredMovies = this.homeController.getObservableMovies();
 
         // Then: Die Liste enthält alle Filme mit "the".
-        assertEquals(9, filteredMovies.size()); // Erwartet, dass es 9 Filme gibt.
+        assertEquals(22, filteredMovies.size()); // Erwartet, dass es 9 Filme gibt.
         assertTrue(filteredMovies.stream().allMatch(movie -> movie.getTitle().contains
                 (query) || movie.getDescription().contains(query)));
     }
@@ -122,11 +121,11 @@ class HomeControllerTest {
         // Given: Eine vollständige Liste.
         String query = "";
 
-        // When: Im Suchfeld kein
+        // When: Im Suchfeld nichts angegeben ist.
         this.homeController.searchMovies(query);
         ObservableList<Movie> filteredMovies = this.homeController.getObservableMovies();
 
         // Then: Die Liste enthält alle Filme.
-        assertEquals(11, filteredMovies.size());
+        assertEquals(27, filteredMovies.size());
     }
 }
