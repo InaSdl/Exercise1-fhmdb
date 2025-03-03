@@ -151,7 +151,7 @@ class HomeControllerTest {
         // Then: the filtered list should have the expected number of movies
         assertEquals(expectedCount, filteredMovies.size(), "we expect " + expectedCount + " movies that meet the criteria");
 
-        // And check each movie meets the  criteria
+        // And check each movie meets the criteria
         for (Movie movie : filteredMovies) {
             // Check that the movie has the SCIENCE_FICTION genre.
             assertTrue(movie.getGenres().contains(Genre.SCIENCE_FICTION),
