@@ -13,33 +13,6 @@ import java.util.List;
 class HomeControllerTest {
     private HomeController homeController;
 
-    @Test
-    public void testSortAscending() {
-        //Given:
-        HomeController homeController = new HomeController();
-        ObservableList<Movie> observableMovies = homeController.getObservableMovies();
-        observableMovies.addAll(Movie.initializeMovies());
-        //When:
-        homeController.sortAscending(observableMovies);
-        //Then:
-        for (int i = 0; i < observableMovies.size() - 1; i++) {
-            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) <= 0);
-        }
-    }
-
-    @Test
-    public void testSortDescending() {
-        //Given:
-        HomeController homeController = new HomeController();
-        ObservableList<Movie> observableMovies = homeController.getObservableMovies();
-        observableMovies.addAll(Movie.initializeMovies());
-        //When:
-        homeController.sortDescending(observableMovies);
-        //Then:
-        for (int i = 0; i < observableMovies.size() - 1; i++) {
-            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) >= 0);
-        }
-    }
 
     @BeforeEach
     void setUp() {
@@ -47,6 +20,35 @@ class HomeControllerTest {
         ObservableList<Movie> observableMovies = this.homeController.getObservableMovies();
         observableMovies.addAll(Movie.initializeMovies());
     }
+
+    @Test
+    void Sort_Ascending() {
+        // Given: Liste Observable Movies
+
+        // When: Die Funktion Sort_Ascending wird aufgerufen um aufsteigend zu sortieren.
+        this.homeController.sortAscending(this.homeController.getObservableMovies());
+
+        // Then: Die Liste ist aufsteigend sortiert.
+        ObservableList<Movie> observableMovies = this.homeController.getObservableMovies();
+        for (int i = 0; i < observableMovies.size() - 1; i++) {
+            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) <= 0);
+        }
+    }
+
+
+    @Test
+    public void Sort_Descending() {
+        //Given: Liste Observable Movies
+
+        //When: Die Funktion Sort_Descending wird aufgerufen um absteigend zu sortieren.
+        this.homeController.sortDescending(this.homeController.getObservableMovies());
+        //Then: Die Liste ist absteigend sortiert.
+        ObservableList<Movie> observableMovies = this.homeController.getObservableMovies();
+        for (int i = 0; i < observableMovies.size() - 1; i++) {
+            assertTrue(observableMovies.get(i).getTitle().compareTo(observableMovies.get(i + 1).getTitle()) >= 0);
+        }
+    }
+
 
     @Test
     void Filter_Science_Fiction_Movies() {
@@ -136,6 +138,7 @@ class HomeControllerTest {
         homeController.filterMovies(Genre.SCIENCE_FICTION, "the");
         ObservableList<Movie> filteredMovies = homeController.getObservableMovies();
 
+<<<<<<< HEAD
         // Calculate the expected number of movies using a loop
         int expectedCount = 0;
         List<Movie> allMovies = Movie.initializeMovies();
@@ -146,6 +149,30 @@ class HomeControllerTest {
                 if (titleLower.contains("the") || descriptionLower.contains("the")) {
                     expectedCount++;
                 }
+=======
+        // Then: all movies must have genre "science_fiction" and in the title or description "the"
+        // according to dummy list there should be 4 movies:
+        assertEquals(6, filteredMovies.size(), "we expect 6 movies that meet the criteria");
+
+        boolean allMatch = true;
+        for (int i = 0; i < filteredMovies.size(); i++) {
+            Movie movie = filteredMovies.get(i);
+
+            // check if the movie has the genre SCIENCE_FICTION
+            if (!movie.getGenres().contains(Genre.SCIENCE_FICTION)) {
+                allMatch = false;
+                break;
+            }
+
+            // convert title and description to lower case for case-insensitive comparison
+            String titleLower = movie.getTitle().toLowerCase();
+            String descriptionLower = movie.getDescription().toLowerCase();
+
+            // check if either title or description contains word "the"
+            if (!(titleLower.contains("the") || descriptionLower.contains("the"))) {
+                allMatch = false;
+                break;
+>>>>>>> origin/master
             }
         }
         // Then: the filtered list should have the expected number of movies

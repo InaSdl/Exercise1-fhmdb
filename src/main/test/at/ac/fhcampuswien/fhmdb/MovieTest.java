@@ -10,18 +10,18 @@ import java.util.List;
 public class MovieTest {
 
     @Test
-    public void testInitializeMovies() {
+    public void Initialize_Movies() {
         //given
 
         // when initialise movies
         List<Movie> movies = Movie.initializeMovies();
 
-        // then we expect 11 movies
-        assertEquals(11, movies.size(), "Die Anzahl der Filme sollte 8 sein.");
+        // then we expect 27 movies
+        assertEquals(27, movies.size(), "Die Anzahl der Filme sollte 27 sein.");
 
     }
     @Test
-    public void testMovieToString() {
+    public void Movie_To_String() {
         // given Ein Movie-Objekt mit einem Titel, einer Beschreibung und Genres
         Movie movie = new Movie("Test Movie", "A test movie description", List.of(Genre.ACTION, Genre.DRAMA));
 
