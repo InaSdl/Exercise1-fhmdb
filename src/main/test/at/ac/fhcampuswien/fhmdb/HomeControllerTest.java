@@ -55,7 +55,7 @@ class HomeControllerTest {
         // Given: Die Liste enthält gemischte Genres.
 
         // When: Es wird nach "SCIENCE_FICTION" gefiltert.
-        this.homeController.filterMoviesByGenre(Genre.SCIENCE_FICTION);
+        this.homeController.filterMovies(Genre.SCIENCE_FICTION, "");
         ObservableList<Movie> filteredMovies = this.homeController.getObservableMovies();
 
         // Then: Die Liste enthält nur Filme mit dem Genre SCIENCE_FICTION.
@@ -66,13 +66,14 @@ class HomeControllerTest {
     @Test
     void Filter_Clear_Genre() {
         // Given: Die Liste enthält MYSTERY-Filme.
-        this.homeController.filterMoviesByGenre(Genre.MYSTERY);
-        ObservableList<Movie> filteredMovies = this.homeController.getObservableMovies();
+        this.homeController.filterMovies(Genre.MYSTERY,"");
+
 
         // When: Filter wird entfernt.
-        this.homeController.filterMoviesByGenre(null);
+        this.homeController.filterMovies(Genre.NONE,"");
 
         // Then: Die Liste enthält wieder alle Filme.
+        ObservableList<Movie> filteredMovies = this.homeController.getObservableMovies();
         assertEquals(27, filteredMovies.size()); // Erwartet, dass alle Filme angezeigt werden.
     }
 

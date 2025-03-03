@@ -85,19 +85,23 @@ public class HomeController implements Initializable {
         return observableMovies;
     }
 
-    public void filterMoviesByGenre(Genre genre) {
-        filterMovies(genre, "");
-    }
+//    public void filterMoviesByGenre(Genre genre) {
+//        filterMovies(genre, "");
+//    }
 
     public void searchMovies(String query) {
         filterMovies(null, query);
     }
 
     public void filterMovies(Genre genre, String query) {
+        if ((genre == null || genre == Genre.NONE) && query.isEmpty()) {
+            observableMovies.setAll(movies);
+            return;
+        }
 
         List<Movie> filteredMovies = movies.stream()
                 .filter(movie -> {
-                    if (genre != null && !movie.getGenres().contains(genre)) {
+                    if (genre != null && genre != Genre.NONE && !movie.getGenres().contains(genre)) {
                         return false;
                     }
                     if (!query.isEmpty() && !movie.getTitle().toLowerCase().contains(query.toLowerCase())
