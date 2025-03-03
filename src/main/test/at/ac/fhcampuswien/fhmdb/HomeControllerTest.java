@@ -133,8 +133,8 @@ class HomeControllerTest {
     void Filter_By_Genre_And_SearchQuery() {
         // Given: the entire movie-list is already there
         // When: we filter by genre SCIENCE_FICTION and query "the".
-        this.homeController.filterMovies(Genre.SCIENCE_FICTION, "the");
-        ObservableList<Movie> filteredMovies = this.homeController.getObservableMovies();
+        homeController.filterMovies(Genre.SCIENCE_FICTION, "the");
+        ObservableList<Movie> filteredMovies = homeController.getObservableMovies();
 
         // Then: all movies must have genre "science_fiction" and in the title or description "the"
         // according to dummy list there should be 4 movies:
@@ -150,7 +150,7 @@ class HomeControllerTest {
                 break;
             }
 
-            // convert title and description to lower case for case insensitive comparison
+            // convert title and description to lower case for case-insensitive comparison
             String titleLower = movie.getTitle().toLowerCase();
             String descriptionLower = movie.getDescription().toLowerCase();
 
