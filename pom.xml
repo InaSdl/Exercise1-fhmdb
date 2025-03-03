@@ -6,7 +6,7 @@
 
     <groupId>at.ac.fhcampuswien</groupId>
     <artifactId>exercise1-fhmdb</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>fhmdb</name>
 
     <properties>
